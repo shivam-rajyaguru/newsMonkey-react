@@ -337,74 +337,20 @@ export class News extends Component {
     return (
       <div className="container my-4">
         <h2 className="my-4">NewsMonkey - Top Headlines</h2>
+
         <div className="row">
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/ZLS7UQ33ORFKHAU2LRCF6LVBHY.jpg&w=1440"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.usatoday.com/gcdn/authoring/authoring-images/2024/01/17/USAT/72256158007-lamar-49-ers-0117.jpg?crop=6897,3882,x0,y0&width=3200&height=1802&format=pjpg&auto=webp"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://ichef.bbci.co.uk/news/1024/branded_news/1461F/production/_132378438_gettyimages-1938773511-1.jpg"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/ZLS7UQ33ORFKHAU2LRCF6LVBHY.jpg&w=1440"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.usatoday.com/gcdn/authoring/authoring-images/2024/01/17/USAT/72256158007-lamar-49-ers-0117.jpg?crop=6897,3882,x0,y0&width=3200&height=1802&format=pjpg&auto=webp"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://ichef.bbci.co.uk/news/1024/branded_news/1461F/production/_132378438_gettyimages-1938773511-1.jpg"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/ZLS7UQ33ORFKHAU2LRCF6LVBHY.jpg&w=1440"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://www.usatoday.com/gcdn/authoring/authoring-images/2024/01/17/USAT/72256158007-lamar-49-ers-0117.jpg?crop=6897,3882,x0,y0&width=3200&height=1802&format=pjpg&auto=webp"
-            />
-          </div>
-          <div className="col-md-4">
-            <NewsItem
-              title="news title"
-              descryption="news descryption"
-              url="https://ichef.bbci.co.uk/news/1024/branded_news/1461F/production/_132378438_gettyimages-1938773511-1.jpg"
-            />
-          </div>
+          {this.state.articles.map((elements) => {
+            return (
+              <div className="col-md-4">
+                <NewsItem
+                  title={elements.title}
+                  descryption={elements.description}
+                  urlImage={elements.urlToImage}
+                  url={elements.url}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );
