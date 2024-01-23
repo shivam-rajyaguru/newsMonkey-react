@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import Spinner from "./Spinner";
 
 export class News extends Component {
   // articles = [
@@ -336,41 +337,57 @@ export class News extends Component {
   }
   // Called immediately after a component is mounted. Setting state here will trigger re-rendering. or run after render methoc
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=1&pageSize=30`;
+    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=1&pageSize=${this.props.pageSize}`;
+    {
+      this.setState({ loading: true });
+    }
     let data = await fetch(url);
     let parsedData = await data.json();
     // console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
+      loading: false,
     });
   }
 
   handlePrevClick = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
       this.state.page - 1
-    }&pageSize=30`;
+    }&pageSize=${this.props.pageSize}`;
+    {
+      this.setState({ loading: true });
+    }
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({
       page: this.state.page - 1,
       articles: parsedData.articles,
+      loading: false,
     });
   };
 
   handleNextClick = async () => {
-    if (this.state.page + 1 > Math.ceil(this.state.totalResults / 30)) {
-    } else {
+    if (
+      !(
+        this.state.page + 1 >
+        Math.ceil(this.state.totalResults / this.props.pageSize)
+      )
+    ) {
       let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
         this.state.page + 1
-      }&pageSize=20`;
+      }&pageSize=${this.props.pageSize}`;
+      {
+        this.setState({ loading: true });
+      }
       let data = await fetch(url);
       let parsedData = await data.json();
       // console.log(parsedData);
       this.setState({
         page: this.state.page + 1,
         articles: parsedData.articles,
+        loading: false,
       });
     }
   };
@@ -378,25 +395,31 @@ export class News extends Component {
   render() {
     return (
       <div className="container my-4">
-        <h2 className="my-4">NewsMonkey - Top Headlines</h2>
-
+        <h2
+          className="my-4 text-center
+        "
+        >
+          NewsMonkey - Top Headlines
+        </h2>
+        {this.state.loading && <Spinner />}
         <div className="row">
-          {this.state.articles.map((elements) => {
-            return (
-              <div key={elements.url} className="col-md-4">
-                <NewsItem
-                  title={elements.title}
-                  descryption={elements.description}
-                  urlImage={
-                    elements.urlToImage
-                      ? elements.urlToImage
-                      : "https://img.freepik.com/free-photo/3d-rendering-illustration-letter-blocks-forming-word-news-white-background_181624-60840.jpg"
-                  }
-                  url={elements.url}
-                />
-              </div>
-            );
-          })}
+          {!this.state.loading &&
+            this.state.articles.map((elements) => {
+              return (
+                <div key={elements.url} className="col-md-4">
+                  <NewsItem
+                    title={elements.title}
+                    descryption={elements.description}
+                    urlImage={
+                      elements.urlToImage
+                        ? elements.urlToImage
+                        : "https://img.freepik.com/free-photo/3d-rendering-illustration-letter-blocks-forming-word-news-white-background_181624-60840.jpg"
+                    }
+                    url={elements.url}
+                  />
+                </div>
+              );
+            })}
         </div>
 
         <div className="containerd d-flex justify-content-between">
@@ -412,6 +435,10 @@ export class News extends Component {
             type="button"
             className="btn btn-dark"
             onClick={this.handleNextClick}
+            disabled={
+              this.state.page + 1 >
+              Math.ceil(this.state.totalResults / this.props.pageSize)
+            }
           >
             Next &rarr;
           </button>
