@@ -438,6 +438,8 @@ export class News extends Component {
                         : "https://img.freepik.com/free-photo/3d-rendering-illustration-letter-blocks-forming-word-news-white-background_181624-60840.jpg"
                     }
                     url={elements.url}
+                    author={elements.author}
+                    date={elements.publishedAt}
                   />
                 </div>
               );
