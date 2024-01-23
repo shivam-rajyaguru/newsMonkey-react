@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
+import PropTypes from "prop-types";
 
 export class News extends Component {
   // articles = [
@@ -326,6 +327,19 @@ export class News extends Component {
   //       "Comment on this story\r\nComment\r\nAdd to your saved stories\r\nSave\r\nFormer president Donald Trump is lobbing racially charged attacks at Republican rival Nikki Haley, a daughter of Indian immigrants who… [+8069 chars]",
   //   },
   // ];
+
+  static defaultProps = {
+    country: "in",
+    pageSize: 8,
+    category: "general",
+  };
+
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string,
+  };
+
   constructor() {
     super();
 
@@ -337,7 +351,7 @@ export class News extends Component {
   }
   // Called immediately after a component is mounted. Setting state here will trigger re-rendering. or run after render methoc
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=cd507480f5e3479d8631c653496c6df8&page=1&pageSize=${this.props.pageSize}`;
     {
       this.setState({ loading: true });
     }
@@ -352,7 +366,11 @@ export class News extends Component {
   }
 
   handlePrevClick = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     {
@@ -375,7 +393,11 @@ export class News extends Component {
         Math.ceil(this.state.totalResults / this.props.pageSize)
       )
     ) {
-      let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.country
+      }&category=${
+        this.props.category
+      }&apiKey=cd507480f5e3479d8631c653496c6df8&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
       {

@@ -43,33 +43,46 @@ export class Navbar extends Component {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Dropdown
+                    News Categaory
                   </a>
                   <ul className="dropdown-menu">
                     <li>
                       <a className="dropdown-item" href="#">
-                        Action
+                        Business
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
-                        Another action
+                        Entertainment
                       </a>
                     </li>
                     <li>
-                      <hr className="dropdown-divider" />
+                      <a className="dropdown-item" href="#">
+                        General
+                      </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
-                        Something else here
+                        Health
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Science
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Sports
+                      </a>
+                    </li>
+
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Technology
                       </a>
                     </li>
                   </ul>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link disabled" aria-disabled="true">
-                    Disabled
-                  </a>
                 </li>
               </ul>
               <form className="d-flex" role="search">
