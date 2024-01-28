@@ -7,6 +7,7 @@ import LoadingBar from "react-top-loading-bar";
 
 export default class App extends Component {
   pageSize = 10;
+  keyId = "cd507480f5e3479d8631c653496c6df8";
   state = {
     progress: 0,
   };
@@ -32,6 +33,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="general"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -45,6 +47,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="business"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -58,6 +61,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="entertainment"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -71,6 +75,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="health"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -84,6 +89,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="science"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -97,6 +103,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="sports"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
@@ -110,6 +117,7 @@ export default class App extends Component {
                   pageSize={this.pageSize}
                   country="in"
                   category="technology"
+                  apikey={this.keyId}
                 />
               }
             ></Route>
